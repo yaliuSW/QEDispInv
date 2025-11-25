@@ -42,6 +42,26 @@ QEDispInv provides command-line interfaces for both forward and inversion module
 
 Detailed usage examples and parameter specifications are available in the [`Tutorial`](doc/TUTORIAL.md).
 
+## Python forward API (experimental)
+
+An experimental Python wrapper is available for directly computing dispersion curves without invoking the command-line tool. Build the shared library target after configuring CMake:
+
+```bash
+cmake --build build --target qedispinv_forward
+```
+
+The compiled library is placed under `lib/`. You can then call the ctypes helper in `python/forward_api.py`:
+
+```python
+import numpy as np
+from python.forward_api import compute_dispersion
+
+model = np.loadtxt("demo/syn-nearsurface/model_data.txt")
+freqs = np.linspace(0.5, 5.0, 20)
+curves = compute_dispersion(model, freqs, mode_max=1)
+print(curves)
+```
+
 ## Citation
 
 If you use QEDispInv in your research, please cite this work as follows:

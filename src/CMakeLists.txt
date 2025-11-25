@@ -16,6 +16,20 @@ target_link_libraries(disp
     segn96_fortran
 )
 
+add_library(qedispinv_forward SHARED
+    forward_api.cc
+)
+
+target_link_libraries(qedispinv_forward
+    PRIVATE
+    disp
+    fmt::fmt-header-only
+)
+
+set_target_properties(qedispinv_forward PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib
+)
+
 add_executable(secfunc
     main_secfunc.cc
 )
